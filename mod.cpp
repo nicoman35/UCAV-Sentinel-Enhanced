@@ -1,0 +1,12 @@
+name = "UCAV Enhanced";
+picture = "logo.paa";
+actionName = "Website";
+action = "https://forums.bohemia.net/forums/topic/232269-ucav-enhanced/";
+description = "UCAV Enhanced";
+logo = "logo.paa";
+logoOver = "logo.paa";
+tooltip = "UCAV";
+tooltipOwned = "UCAV";
+overview = "This enhanced UCAV Sentinel will let you see and engage targets further than ever before, fly higher, kill everything.";
+author = "disel5187";
+overviewPicture = "logo.paa";
