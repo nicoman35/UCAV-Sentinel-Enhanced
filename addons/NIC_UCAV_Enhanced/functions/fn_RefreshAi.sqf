@@ -5,7 +5,7 @@
 	Edited Date: 	15.04.2021
 	
 	Description:
-		Deletes old AI crew of an UAV, and creates a new one.
+		Deletes old AI crew of an UAV, then creates a new one. Reconnects player and reassigns old role.
 		Intention: 	Sometimes, UAVs get unresponsive to commands, fly away on their own, do things
 					not commanded to do, etc. By replacing the UAV crew with a new one, hopefully
 					things get corrected and the UAV gets responsive again.

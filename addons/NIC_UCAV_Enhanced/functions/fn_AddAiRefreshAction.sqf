@@ -18,7 +18,6 @@ params [["_UAV", objNull]];
 if (isNull _UAV) exitWith {};
 if (isNil{_UAV getVariable "EUAV_ActionID_RefreshAi"}) then {				// add Refresh AI action to uav
 	private _actionID = _UAV addAction [
-		// format[localize "STR_ASL_PICKUP"],									// Title
 		"Refresh AI",														// Title
 		{_this select 0 call NIC_EUAV_fnc_RefreshAi},						// Script
 		nil,																// Arguments
