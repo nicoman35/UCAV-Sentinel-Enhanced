@@ -21,6 +21,7 @@ if (isNil "_vehicle" || isNil "_projectile") exitWith {};
 
 private _projectileList = _vehicle getVariable ["EUAV_ProjectileList", []];
 private _ammoName = getText (configfile >> "CfgMagazines" >> _magazine >> "displayName");
+_ammoName = _ammoName trim [" x1", 2];
 _ammoName = _ammoName trim [" x2", 2];
 _ammoName = _ammoName trim [" x4", 2];
 _projectileList pushBack [_projectile, _ammoName];

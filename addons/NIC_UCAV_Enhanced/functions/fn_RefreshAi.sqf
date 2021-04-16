@@ -22,7 +22,7 @@ if (isNull _UAV) exitWith {};
 private _connectedPlayer = UAVControl _UAV select 0;
 private _role = UAVControl _UAV select 1;
 _connectedPlayer connectTerminalToUAV objNull;
-{_UAV deleteVehicleCrew _x } forEach crew _UAV;
+{_UAV deleteVehicleCrew _x} forEach crew _UAV;
 sleep 0.1;
 createVehicleCrew _UAV;
 (group ((crew _UAV) select 0)) setBehaviour "SAFE";
