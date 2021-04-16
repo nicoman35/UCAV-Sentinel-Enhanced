@@ -30,7 +30,7 @@ if (_vehicle getVariable ["EUAV_MonitorActive", false]) exitWith {};
 _vehicle setVariable ["EUAV_MonitorActive", true];
 
 private ["_messageText"];	
-while {count _projectileList > 0} do {
+while {alive _vehicle && count _projectileList > 0} do {
 	_messageText = "Projectile	-  Height";
 	if (isLaserOn _vehicle && alive cursorTarget) then {_messageText = "Projectile  -  Height  -  Target Distance"};
 	{
