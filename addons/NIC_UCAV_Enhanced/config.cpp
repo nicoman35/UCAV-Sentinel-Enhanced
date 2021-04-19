@@ -1861,7 +1861,4 @@ class CfgWeapons {
 	};
 	
 };
-// class cfgMods {
-	// author = "NIC";
-	// timepacked = "1609779676";
-// };
+
