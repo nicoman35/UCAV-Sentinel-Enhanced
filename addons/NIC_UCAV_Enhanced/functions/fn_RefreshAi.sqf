@@ -22,6 +22,8 @@ if (isNull _UAV) exitWith {};
 private _connectedPlayer = UAVControl _UAV select 0;
 private _role = UAVControl _UAV select 1;
 _connectedPlayer connectTerminalToUAV objNull;
+private _group = group _UAV;
+for "_i" from count waypoints _group - 1 to 0 step -1 do {deleteWaypoint [_group, _i]};
 {_UAV deleteVehicleCrew _x} forEach crew _UAV;
 sleep 0.1;
 createVehicleCrew _UAV;
