@@ -32,6 +32,15 @@ class CfgFunctions {
 		};
 	};
 };
+class SensorTemplateAntiRadiation;
+class SensorTemplateActiveRadar;
+class SensorTemplateDataLink;
+class SensorTemplateIR;
+class SensorTemplateLaser;
+class SensorTemplateMan;
+class SensorTemplateNV;
+class SensorTemplatePassiveRadar;
+class SensorTemplateVisual;
 class CfgAmmo {
 	class MissileCore;
 	class MissileBase: MissileCore {
@@ -41,6 +50,7 @@ class CfgAmmo {
 	class ace_maverick_L: Missile_AGM_02_F {
 		timeToLive = 240;
 		missileLockMaxDistance = 20000;
+		cameraViewAvailable = 1;
 		class ace_missileguidance {
 			enabled = 1;
 			minDeflection = 0;
@@ -67,16 +77,85 @@ class CfgAmmo {
 			};
 		};
 	};
+	class LaserBombCore;
+	class ammo_Bomb_LaserGuidedBase;
+	class ammo_Bomb_SmallDiameterBase;
+	class ammo_Bomb_SDB: ammo_Bomb_SmallDiameterBase
+	{
+		model="\A3\Weapons_F_Sams\Ammo\Bomb_05_F_fly.p3d";
+		proxyShape="\A3\Weapons_F_Sams\Ammo\Bomb_05_F.p3d";
+		cameraViewAvailable = 1;
+		class Components
+		{
+			class SensorsManagerComponent
+			{
+				class Components
+				{
+					class NVSensorComponent: SensorTemplateNV
+					{
+						class AirTarget
+						{
+							minRange=8000;
+							maxRange=8000;
+							objectDistanceLimitCoef=-1;
+							viewDistanceLimitCoef=-1;
+						};
+						class GroundTarget
+						{
+							minRange=16000;
+							maxRange=16000;
+							objectDistanceLimitCoef=-1;
+							viewDistanceLimitCoef=-1;
+						};
+						maxTrackableSpeed=30;
+						angleRangeHorizontal=180;
+						angleRangeVertical=180;
+					};
+					class LaserSensorComponent: SensorTemplateLaser
+					{
+						class AirTarget
+						{
+							minRange=8000;
+							maxRange=8000;
+							objectDistanceLimitCoef=-1;
+							viewDistanceLimitCoef=-1;
+						};
+						class GroundTarget
+						{
+							minRange=16000;
+							maxRange=16000;
+							objectDistanceLimitCoef=-1;
+							viewDistanceLimitCoef=-1;
+						};
+						maxTrackableSpeed=30;
+						angleRangeHorizontal=180;
+						angleRangeVertical=180;
+					};
+					class IRSensorComponent: SensorTemplateIR
+					{
+						class AirTarget
+						{
+							minRange=500;
+							maxRange=8000;
+							objectDistanceLimitCoef=-1;
+							viewDistanceLimitCoef=1;
+						};
+						class GroundTarget
+						{
+							minRange=500;
+							maxRange=16000;
+							objectDistanceLimitCoef=1;
+							viewDistanceLimitCoef=1;
+						};
+						maxTrackableSpeed=55;
+						angleRangeHorizontal=180;
+						angleRangeVertical=180;
+					};
+				};
+			};
+		};
+	};
 };
-class SensorTemplatePassiveRadar;
-class SensorTemplateAntiRadiation;
-class SensorTemplateActiveRadar;
-class SensorTemplateIR;
-class SensorTemplateVisual;
-class SensorTemplateMan;
-class SensorTemplateLaser;
-class SensorTemplateNV;
-class SensorTemplateDataLink;
 class DefaultVehicleSystemsDisplayManagerLeft {
 	class components;
 };
@@ -376,6 +455,7 @@ class CfgVehicles {
 				};
 			};
 			class VehicleSystemsDisplayManagerComponentLeft: DefaultVehicleSystemsDisplayManagerLeft {
+				defaultDisplay="MinimapDisplay";
 				class Components {
 					class EmptyDisplay {
 						componentType = "EmptyDisplayComponent";
@@ -387,13 +467,17 @@ class CfgVehicles {
 					class UAVDisplay {
 						componentType = "UAVFeedDisplayComponent";
 					};
-					class VehicleMissileDisplay {
-						componentType = "TransportFeedDisplayComponent";
-						source = "Missile";
-					};
+					// class VehicleMissileDisplay {
+						// componentType = "TransportFeedDisplayComponent";
+						// source = "Missile";
+					// };
+					// class MissileDisplay {
+						// componentType="TransportFeedDisplayComponent";
+						// source="Missile";
+					// };
 					class SensorDisplay {
 						componentType = "SensorsDisplayComponent";
-						range[] = {4000,2000,16000,8000};
+						range[] = {8000,16000,2000,4000};
 						resource = "RscCustomInfoSensors";
 					};
 				};
@@ -411,13 +495,17 @@ class CfgVehicles {
 					class UAVDisplay {
 						componentType = "UAVFeedDisplayComponent";
 					};
-					class VehicleMissileDisplay {
-						componentType = "TransportFeedDisplayComponent";
-						source = "Missile";
-					};
+					// class VehicleMissileDisplay {
+						// componentType = "TransportFeedDisplayComponent";
+						// source = "Missile";
+					// };
+					// class MissileDisplay {
+						// componentType="TransportFeedDisplayComponent";
+						// source="Missile";
+					// };
 					class SensorDisplay {
 						componentType = "SensorsDisplayComponent";
-						range[] = {4000,2000,16000,8000};
+						range[] = {8000,16000,2000,4000};
 						resource = "RscCustomInfoSensors";
 					};
 				};
@@ -539,8 +627,10 @@ class CfgVehicles {
 		class Turrets {
 			class MainTurret: NewTurret {
 				isCopilot = 0;
-				minElev = -90;
-				maxElev = 5;
+				// minElev = -90;
+				// maxElev = 5;
+				minElev = -100;
+				maxElev = 10;
 				initElev = -45;
 				minTurn = -180;
 				maxTurn = 180;
@@ -574,6 +664,7 @@ class CfgVehicles {
 				startEngine = 0;
 				class Components {
 					class VehicleSystemsDisplayManagerComponentLeft: DefaultVehicleSystemsDisplayManagerLeft {
+						defaultDisplay="MinimapDisplay";
 						class Components {
 							class EmptyDisplay {
 								componentType = "EmptyDisplayComponent";
@@ -585,10 +676,14 @@ class CfgVehicles {
 							class UAVDisplay {
 								componentType = "UAVFeedDisplayComponent";
 							};
-							class VehicleMissileDisplay {
-								componentType = "TransportFeedDisplayComponent";
-								source = "Missile";
-							};
+							// class VehicleMissileDisplay {
+								// componentType = "TransportFeedDisplayComponent";
+								// source = "Missile";
+							// };
+							// class MissileDisplay {
+								// componentType="TransportFeedDisplayComponent";
+								// source="Missile";
+							// };
 							class SensorDisplay {
 								componentType = "SensorsDisplayComponent";
 								range[] = {8000,16000,2000,4000};
@@ -609,10 +704,14 @@ class CfgVehicles {
 							class UAVDisplay {
 								componentType = "UAVFeedDisplayComponent";
 							};
-							class VehicleMissileDisplay {
-								componentType = "TransportFeedDisplayComponent";
-								source = "Missile";
-							};
+							// class VehicleMissileDisplay {
+								// componentType = "TransportFeedDisplayComponent";
+								// source = "Missile";
+							// };
+							// class MissileDisplay {
+								// componentType="TransportFeedDisplayComponent";
+								// source="Missile";
+							// };
 							class SensorDisplay {
 								componentType = "SensorsDisplayComponent";
 								range[] = {8000,16000,2000,4000};
