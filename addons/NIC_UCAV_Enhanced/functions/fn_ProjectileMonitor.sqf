@@ -9,7 +9,7 @@
 		
 	Parameters:
 		_vehicle:		Object - air vehicle the projectile is droped from
-		_magazine:		String - magazine projectile is taken from
+		_magazine:		String - magazine projectile is fired from
 		_projectile:	Object - projectile just droped/fired from the vehicle
 		
 	Returns:
@@ -18,7 +18,7 @@
 
 params [["_vehicle", objNull], "_magazine", ["_projectile", objNull]];
 if (isNull _vehicle || isNull _projectile) exitWith {};
-// diag_log formatText ["%1%2%3%4%5%6%7%8%9%10", time, "s  _vehicle: ", _vehicle, "  _magazine: ", _magazine, "  _projectile: ", _projectile];
+
 private _projectileList = _vehicle getVariable ["EUAV_ProjectileList", []];
 private _ammoName = getText (configfile >> "CfgMagazines" >> _magazine >> "displayName");
 _ammoName = _ammoName trim [" x1", 2];

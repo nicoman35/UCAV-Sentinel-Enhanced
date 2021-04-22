@@ -627,8 +627,6 @@ class CfgVehicles {
 		class Turrets {
 			class MainTurret: NewTurret {
 				isCopilot = 0;
-				// minElev = -90;
-				// maxElev = 5;
 				minElev = -100;
 				maxElev = 10;
 				initElev = -45;
