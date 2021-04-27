@@ -2,16 +2,17 @@
 	Author: 		Nicoman
 	Function: 		NIC_EUAV_fnc_ProjectileMonitor
 	Version: 		1.0
-	Edited Date: 	14.04.2021
+	Edited Date: 	26.04.2021
 	
 	Description:
-		Monitor projectiles (bombs/rockets) heights and distances from their targets
-		
+		Monitor projectiles (bombs/rockets) heights and distances from their targets and show the list via
+		hint to player
+	
 	Parameters:
 		_vehicle:		Object - air vehicle the projectile is droped from
 		_magazine:		String - magazine projectile is fired from
 		_projectile:	Object - projectile just droped/fired from the vehicle
-		
+	
 	Returns:
 		None
 */
@@ -29,7 +30,8 @@ _vehicle setVariable ["EUAV_ProjectileList", _projectileList];
 if (_vehicle getVariable ["EUAV_MonitorActive", false]) exitWith {};
 _vehicle setVariable ["EUAV_MonitorActive", true];
 
-private ["_messageText"];	
+private _clearHint = false;
+private ["_messageText", "_index"];	
 while {alive _vehicle && count _projectileList > 0} do {
 	_messageText = "Projectile	-  Height";
 	if (isLaserOn _vehicle && alive cursorTarget) then {_messageText = "Projectile  -  Height  -  Target Distance"};
@@ -48,7 +50,18 @@ while {alive _vehicle && count _projectileList > 0} do {
 		};
 	} forEach _projectileList;
 	_messageText setAttributes ["align", "left"];
-	hintsilent composeText [_messageText];
+	_index = 1;
+	if (count (UAVControl _vehicle) > 2) then {_index = 3};
+	if (UAVControl _vehicle select 0 == player && UAVControl _vehicle select _index == "GUNNER") then {
+		hintsilent composeText [_messageText];
+		_clearHint = true;
+	} else {
+		if (_clearHint) then {
+			hintsilent "";
+			_clearHint = false;
+		};
+		sleep 1;
+	};
 	sleep 0.1;
 	private _projectileList = _vehicle getVariable ["EUAV_ProjectileList", []];
 };

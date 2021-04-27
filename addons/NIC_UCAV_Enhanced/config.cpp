@@ -17,7 +17,8 @@ class CfgPatches {
 			"weapon_SDBLauncher"
 		};
 		ammo[] = {
-			"ace_maverick_L"
+			"ace_maverick_L",
+			"ammo_Bomb_SDB"
 		};
 	};
 };
@@ -1527,12 +1528,12 @@ class CfgVehicles {
 			wingAutoUnFoldSpeed = 40;
 		};
 		class Eventhandlers: Eventhandlers {
-			init = 				"[_this select 0] spawn NIC_EUAV_fnc_AddAiRefreshAction";
-			landing = 			"[_this, true] call bis_fnc_aircraftTailhookAi";
-			landingcanceled = 	"[_this, false] call bis_fnc_aircraftTailhookAi";
-			engine = 			"_this call bis_fnc_aircraftFoldingWings";
-			gear = 				"_this call bis_fnc_aircraftFoldingWings";
-			fired = 				"[_this select 0, _this select 5, _this select 6] spawn NIC_EUAV_fnc_ProjectileMonitor";
+			init			= "[_this select 0] spawn NIC_EUAV_fnc_AddAiRefreshAction";
+			landing 		= "[_this, true] call bis_fnc_aircraftTailhookAi";
+			landingcanceled = "[_this, false] call bis_fnc_aircraftTailhookAi";
+			engine 			= "_this call bis_fnc_aircraftFoldingWings";
+			gear 			= "_this call bis_fnc_aircraftFoldingWings";
+			fired 			= "[_this select 0, _this select 5, _this select 6] spawn NIC_EUAV_fnc_ProjectileMonitor";
 		};
 	};
 	class B_UAV_05_F_Enhanced: UAV_05_Base_F_Enhanced {
@@ -1956,6 +1957,5 @@ class CfgWeapons {
 			1
 		};
 	};
-	
 };
 
