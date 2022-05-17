@@ -30,6 +30,7 @@ class CfgFunctions {
 			class ProjectileMonitor {};
 			class RefreshAi {};
 			class RefreshAiActionCheck {};
+			class TerrainMonitor {};
 		};
 	};
 };
@@ -1531,7 +1532,7 @@ class CfgVehicles {
 			init			= "[_this select 0] spawn NIC_EUAV_fnc_AddAiRefreshAction";
 			landing 		= "[_this, true] call bis_fnc_aircraftTailhookAi";
 			landingcanceled = "[_this, false] call bis_fnc_aircraftTailhookAi";
-			engine 			= "_this call bis_fnc_aircraftFoldingWings";
+			engine 			= "_this call bis_fnc_aircraftFoldingWings; [_this select 0] execVM '\UCAV_Enhanced\functions\fn_TerrainMonitor.sqf';";
 			gear 			= "_this call bis_fnc_aircraftFoldingWings";
 			fired 			= "[_this select 0, _this select 5, _this select 6] spawn NIC_EUAV_fnc_ProjectileMonitor";
 		};
